@@ -38,11 +38,14 @@ namespace Landis.Library.Succession
                 return false;
             }
 
-            if (Reproduction.MaturePresent(species, site)) {
-                if (isDebugEnabled)
-                    log.DebugFormat("site {0}: {1} seeded on site",
-                                    site.Location, species.Name);
-                return true;
+            if (! species.Name.Equals("PINU.BAN"))
+            {
+                if (Reproduction.MaturePresent(species, site)) {
+                    if (isDebugEnabled)
+                        log.DebugFormat("site {0}: {1} seeded on site",
+                                        site.Location, species.Name);
+                    return true;
+                }
             }
 
             if (isDebugEnabled)
@@ -60,16 +63,25 @@ namespace Landis.Library.Succession
                     
                 if(distance > MaxD + ((double) Model.Core.CellLength / 2.0 * 1.414)) 
                     return false;  //Check no further
-                    
-                double dispersalProb = GetDispersalProbability(EffD, MaxD, distance);
 
+                double dispersalProb = GetDispersalProbability(EffD, MaxD, distance);
+                
                 //First check the Southeast quadrant:
                 if (dispersalProb > Model.Core.GenerateUniform())
                 {
                     Site neighbor = site.GetNeighbor(reloc.Location);
                     if (neighbor != null && neighbor.IsActive)
-                        if (Reproduction.MaturePresent(species, (ActiveSite) neighbor)) 
+                    {
+                        bool neighborSerotinyActivated = Reproduction.serotiny[neighbor][species.Index];
+                        //Console.("serotinyActivated = {0}", serotinyActivated);
+                        if (species.Name.Equals("PINU.BAN")) {
+                            if (neighborSerotinyActivated) {
+                                return true;
+                            }
+                        } else if (Reproduction.MaturePresent(species, (ActiveSite)neighbor) || neighborSerotinyActivated) {
                             return true;
+                        }
+                    }
                 }                              
                 
                 //Next, check all other quadrants:        
@@ -79,17 +91,43 @@ namespace Landis.Library.Succession
                     if(rCol == 0)
                         neighbor = site.GetNeighbor(new RelativeLocation(0, rRow));
                     if (neighbor != null && neighbor.IsActive)
-                        if (Reproduction.MaturePresent(species, (ActiveSite) neighbor)) 
+                    {
+                        bool neighborSerotinyActivated = Reproduction.serotiny[neighbor][species.Index];
+                        //Console.("serotinyActivated = {0}", serotinyActivated);
+                        if (species.Name.Equals("PINU.BAN"))
+                        {
+                            if (neighborSerotinyActivated)
+                            {
+                                return true;
+                            }
+                        }
+                        else if (Reproduction.MaturePresent(species, (ActiveSite)neighbor) || neighborSerotinyActivated)
+                        {
                             return true;
+                        }
+                    }
                 }
 
                 if (dispersalProb > Model.Core.GenerateUniform())
                 {
                     Site neighbor = site.GetNeighbor(new RelativeLocation(rRow * -1, rCol * -1));
                     if (neighbor != null && neighbor.IsActive)
-                        if (Reproduction.MaturePresent(species, (ActiveSite) neighbor)) 
+                    {
+                        bool neighborSerotinyActivated = Reproduction.serotiny[neighbor][species.Index];
+                        //Console.("serotinyActivated = {0}", serotinyActivated);
+                        if (species.Name.Equals("PINU.BAN"))
+                        {
+                            if (neighborSerotinyActivated)
+                            {
+                                return true;
+                            }
+                        }
+                        else if (Reproduction.MaturePresent(species, (ActiveSite)neighbor) || neighborSerotinyActivated)
+                        {
                             return true;
-                 }
+                        }
+                    }
+                }
 
                 if (dispersalProb > Model.Core.GenerateUniform())
                 {
@@ -97,8 +135,21 @@ namespace Landis.Library.Succession
                     if(rCol == 0)
                         neighbor = site.GetNeighbor(new RelativeLocation(0, rRow * -1));
                     if (neighbor != null && neighbor.IsActive)
-                        if (Reproduction.MaturePresent(species, (ActiveSite) neighbor)) 
+                    {
+                        bool neighborSerotinyActivated = Reproduction.serotiny[neighbor][species.Index];
+                        //Console.("serotinyActivated = {0}", serotinyActivated);
+                        if (species.Name.Equals("PINU.BAN"))
+                        {
+                            if (neighborSerotinyActivated)
+                            {
+                                return true;
+                            }
+                        }
+                        else if (Reproduction.MaturePresent(species, (ActiveSite)neighbor) || neighborSerotinyActivated)
+                        {
                             return true;
+                        }
+                    }
                 }
 
             }  // end foreach relativelocation

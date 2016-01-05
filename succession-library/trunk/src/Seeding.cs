@@ -29,14 +29,25 @@ namespace Landis.Library.Succession
         {
             for (int i = 0; i < Model.Core.Species.Count; i++) {
                 ISpecies species = Model.Core.Species[i];
-                if (seedingAlgorithm(species, site)) {
-                    Reproduction.AddNewCohort(species, site);
-                    if (isDebugEnabled)
-                        log.DebugFormat("site {0}: seeded {1}",
-                                        site.Location, species.Name);
-                }
+
+                //if (! species.Name.Equals("PINU.BAN"))
+                //{
+                    if (seedingAlgorithm(species, site))
+                    {
+                        Reproduction.AddNewCohort(species, site);
+                        if (isDebugEnabled)
+                            log.DebugFormat("site {0}: seeded {1}",
+                                            site.Location, species.Name);
+                    }     
+                //}
+
             }
         }
+
+        
+
+       
+
 
         //---------------------------------------------------------------------
         // Generate a  RelativeLocation array for one quarter of the neighborhood.

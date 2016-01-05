@@ -45,6 +45,7 @@ namespace Landis.Library.Succession
             /// A method for determining whether a mature cohort is present at a site for a given species.
             /// </summary>
             public delegate bool MaturePresent(ISpecies species, ActiveSite site);
+
         }
 
         //---------------------------------------------------------------------
@@ -53,7 +54,7 @@ namespace Landis.Library.Succession
 
         private static ISpeciesDataset speciesDataset;
         private static ISiteVar<BitArray> resprout;
-        private static ISiteVar<BitArray> serotiny;
+        public static ISiteVar<BitArray> serotiny;
         //private static ISiteVar<BitArray> planting;
         private static ISiteVar<bool> noEstablish;
         private static IPlanting planting;
