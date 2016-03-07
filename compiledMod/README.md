@@ -1,14 +1,14 @@
-# README
-Dominic cyr  
+# serotinyMod
+Dominic Cyr  
 March 7, 2016  
 
-## Landis Biomass Succession - serotinyMod
+## Landis Succession - serotinyMod
 
 Serotony is a very important adaptation to fire in the boreal forest. In fact, it plays an important role in one the interaction between Jack pine and Black spruce, one of the most common tree interaction of the boreal forest.
 
-The following summarizes a minor modification that we have done to the code of Landis-II Biomass Succession to make serotiny more realistic for boreal species. The way serotiny is simulated has been changed for all serotinous species, but some changes target specifically Jack pine.
+The following summarizes a minor modification that we have done to the code of Landis-II to make serotiny more realistic for boreal species. The way serotiny is simulated has been changed for all serotinous species, but some changes target specifically Jack pine.
 
-More details about how Landis-II Biomass Succession works in general, and, more specifically, how serotiny is implemented can be found [here][http://www.landis-ii.org/extensions/biomass-succession].
+More details about how Landis-II Biomass Succession works in general, and, more specifically, how serotiny is implemented can be found [here][1].
 
 We thank Christian Jauvin and Rob Scheller for their help.
 
@@ -29,8 +29,17 @@ We thank Christian Jauvin and Rob Scheller for their help.
     + I tried adding another possible value for the "post-fire regen" life attribute instead of hard-coding exceptions, ex. strictSerotiny, but I think that would involve modifying and recompiling the core (not sure).
     
     
+### Additionnal note about implementation and installation
+
+Compiling and installing this mod requires that Age Only Succession and Biomass Succession be installed on your system.
+
+To install, just replace the file *./v6/bin/extensions/Landis.Library.Succession.dll* in your Landis-II installation folder by [the one contained in the present folder][2]. We advise making a copy of the original file first.
+
 Don't hesitate to contact me should you have any questions, comments, suggestions... 
 
 Dominic Cyr  
 Yan Boulanger
 
+
+[1]: http://www.landis-ii.org/extensions/biomass-succession
+[2]: https://github.com/dcyr/Library-Succession/blob/serotinyMod/compiledMod/Landis.Library.Succession.dll
